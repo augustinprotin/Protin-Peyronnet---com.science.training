@@ -1,5 +1,6 @@
 import pandas as pd
-
+import warnings
+warnings.filterwarnings("ignore", category=FutureWarning)
 
 def main():
     return 0
@@ -35,14 +36,14 @@ def traitement_des_donnees(data_brut, choix=0):
 
     data["Mjob"] = data["Mjob"].replace("teacher", 0)
     data["Mjob"] = data["Mjob"].replace("health", 1)
-    data["Mjob"] = data["Mjob"].replace("service", 2)
-    data["Mjob"] = data["Mjob"].replace("at home", 3)
+    data["Mjob"] = data["Mjob"].replace("services", 2)
+    data["Mjob"] = data["Mjob"].replace("at_home", 3)
     data["Mjob"] = data["Mjob"].replace("other", 4)
 
     data["Fjob"] = data["Fjob"].replace("teacher", 0)
     data["Fjob"] = data["Fjob"].replace("health", 1)
-    data["Fjob"] = data["Fjob"].replace("service", 2)
-    data["Fjob"] = data["Fjob"].replace("at home", 3)
+    data["Fjob"] = data["Fjob"].replace("services", 2)
+    data["Fjob"] = data["Fjob"].replace("at_home", 3)
     data["Fjob"] = data["Fjob"].replace("other", 4)
 
     data["reason"] = data["reason"].replace("home", 0)
@@ -87,13 +88,7 @@ def traitement_des_donnees(data_brut, choix=0):
     data["G3"] = data["G3"].astype(int)
     data["G3"] = data["G3"].astype(int)
 
-    return data
-
-
-
-
-
-
+    data.to_csv("données_transformées.csv", index=False, sep=";", encoding="utf-8")
     print ("données traitées : ")
     print(data.head)
     if (choix == 0):
