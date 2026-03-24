@@ -1,0 +1,2 @@
+sur les courbes des loss fonctions : 
+    Model1: 
