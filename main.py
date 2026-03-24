@@ -17,9 +17,6 @@ def traitement_des_donnees(data_brut, choix=0):
     #Choix = 2 -> /
 
     data=data_brut
-    # Ajout de la moyenne annuelle + est ce qu'il passe l'année
-    data["Moyenne_annuelle"] = (data["G1"]+data["G2"]+data["G3"])/3
-    data["passe l'annee"] = (data["Moyenne_annuelle"]/20).round().astype(int)
 
     # Remplacement des données vers du numerique
     data["school"] = data["school"].replace("GP", 0)
@@ -114,5 +111,74 @@ def traitement_des_donnees(data_brut, choix=0):
         data.to_csv("données_transformées.csv", index=False, sep=";", encoding="utf-8")
         return data
 
-traitement_des_donnees(chargement_des_donnes("Data/student-por.csv"))
 
+def traitement_inverse(data_brut, choix=0):
+    data=data_brut
+
+    # Remplacement des données vers du numerique
+    data["school"] = data["school"].replace(0, "GP")
+    data["school"] = data["school"].replace(1, "MS")
+
+    data["sex"] = data["sex"].replace(0, "F")
+    data["sex"] = data["sex"].replace(1, "M")
+
+    data["address"] = data["address"].replace(0,"U")
+    data["address"] = data["address"].replace(1,"R")
+
+    data["famsize"] = data["famsize"].replace(0,"GT3")
+    data["famsize"] = data["famsize"].replace(1,"LE3")
+
+    data["Pstatus"] = data["Pstatus"].replace(0,"T")
+    data["Pstatus"] = data["Pstatus"].replace(1,"A") 
+
+    data["Mjob"] = data["Mjob"].replace(0,"teacher")
+    data["Mjob"] = data["Mjob"].replace(1,"health")
+    data["Mjob"] = data["Mjob"].replace(2,"services")
+    data["Mjob"] = data["Mjob"].replace(3,"at_home")
+    data["Mjob"] = data["Mjob"].replace(4,"other")
+
+    data["Fjob"] = data["Fjob"].replace(0,"teacher")
+    data["Fjob"] = data["Fjob"].replace(1,"health")
+    data["Fjob"] = data["Fjob"].replace(2,"services")
+    data["Fjob"] = data["Fjob"].replace(3,"at_home")
+    data["Fjob"] = data["Fjob"].replace(4,"other")
+
+    data["reason"] = data["reason"].replace(0,"home")
+    data["reason"] = data["reason"].replace(1,"reputation")
+    data["reason"] = data["reason"].replace(2,"course")
+    data["reason"] = data["reason"].replace(3,"other")
+
+    data["guardian"] = data["guardian"].replace(0, "father")
+    data["guardian"] = data["guardian"].replace(1, "mother")
+    data["guardian"] = data["guardian"].replace(2, "other")
+
+    data["schoolsup"] = data["schoolsup"].replace(0, "yes")
+    data["schoolsup"] = data["schoolsup"].replace(1, "no")
+
+    data["famsup"] = data["famsup"].replace(0, "yes")
+    data["famsup"] = data["famsup"].replace(1, "no")
+
+    data["paid"] = data["paid"].replace(0,"yes")
+    data["paid"] = data["paid"].replace(1, "no")
+
+    data["activities"] = data["activities"].replace(0,"yes")
+    data["activities"] = data["activities"].replace(1, "no")
+
+    data["nursery"] = data["nursery"].replace(0, "yes")
+    data["nursery"] = data["nursery"].replace(1, "no")
+
+    data["higher"] = data["higher"].replace(0, "yes")
+    data["higher"] = data["higher"].replace(1, "no")
+
+    data["internet"] = data["internet"].replace(0, "yes")
+    data["internet"] = data["internet"].replace(1, "no")
+
+    data["romantic"] = data["romantic"].replace(0, "yes")
+    data["romantic"] = data["romantic"].replace(1, "no")
+
+    data.to_csv("données_transformées_2.csv", index=False, sep=";", encoding="utf-8")
+    print ("données traitées : ")
+    print(data.head)
+
+
+traitement_inverse(traitement_des_donnees(chargement_des_donnes("Data/student-por.csv")))
