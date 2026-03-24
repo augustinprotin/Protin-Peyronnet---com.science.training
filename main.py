@@ -12,13 +12,16 @@ def chargement_des_donnes (nom_fichier_csv):
     return data
 
 def traitement_des_donnees(data_brut, choix=0):
+    #Choix = 0 -> passage de l'année ?
+    #Choix = 1 -> Prediction Moyenne générale ?
+    #Choix = 2 -> /
+
     data=data_brut
     # Ajout de la moyenne annuelle + est ce qu'il passe l'année
     data["Moyenne_annuelle"] = (data["G1"]+data["G2"]+data["G3"])/3
     data["passe l'annee"] = (data["Moyenne_annuelle"]/20).round().astype(int)
 
     # Remplacement des données vers du numerique
-
     data["school"] = data["school"].replace("GP", 0)
     data["school"] = data["school"].replace("MS", 1)
 
@@ -91,10 +94,25 @@ def traitement_des_donnees(data_brut, choix=0):
     data.to_csv("données_transformées.csv", index=False, sep=";", encoding="utf-8")
     print ("données traitées : ")
     print(data.head)
+
     if (choix == 0):
+        data["Moyenne_annuelle"] = (data["G1"]+data["G2"]+data["G3"])/3
+        data["passe l'annee"] = (data["Moyenne_annuelle"]/20).round().astype(int)
+        data.drop(columns=["Moyenne_annuelle", "G1", "G2", "G3"],inplace=True)
+        data.to_csv("données_transformées.csv", index=False, sep=";", encoding="utf-8")
+        return data
+    
+    if (choix == 1):
+        data["Moyenne_annuelle"] = (data["G1"]+data["G2"]+data["G3"])/3
+        data.drop(columns=["G1", "G2", "G3"],inplace=True)
+        data.to_csv("données_transformées.csv", index=False, sep=";", encoding="utf-8")
         return data
 
-
+    if (choix == 2):
+        data["Moyenne_annuelle"] = (data["G1"]+data["G2"]+data["G3"])/3
+        data["passe l'annee"] = (data["Moyenne_annuelle"]/20).round().astype(int)
+        data.to_csv("données_transformées.csv", index=False, sep=";", encoding="utf-8")
+        return data
 
 traitement_des_donnees(chargement_des_donnes("Data/student-por.csv"))
 
