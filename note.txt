@@ -1,10 +1,12 @@
+Sur percepron
+
 Pour 100 Epochs:
 
     loss fonctions :
 
         Model1: 
-
         Model2:
+        globalement la meme chose avec une baisse plus rapide pour le model1 et plus basse
 
     Matrices de confusions:
 
@@ -13,16 +15,79 @@ Pour 100 Epochs:
         Model2: 91% qu'il passe vraiment l'année par rapport a ce qu'il a predit et 55% pour ne pas passer l année
 
 
+avec les courbes de loss on c est dit que finalement la courbe n avais pas finir de decroire donc on a voulu passer a 1000 epoches pour verifier cela
+
 Pour 1000 Epochs:
 
     loss fonctions :
-
         Model1: 
-
         Model2:
+
+        on peut voir que sur le model 1 le model tend plus fortement et plus bas que le model 2
 
     Matrices de confusions:
 
-        Model1:
+        Model1: 86% pour vrai et 67% pour les faux
 
-        Model2:
+        Model2: 85% pour vrai et 55% pour faux
+
+
+avec cette baisse de la capaciter a predire part rapport a ce qu on a eu precedement on peut se douter d un overfiting 
+donc pour verifier cela on va mettre la loss avec la validation loss pour comparer
+
+loss fonctions :
+        Model1: on peut voir qu il y a un overfiting car la validation loss est au dessus du train loss 
+        on donc dire que le reseau est trop complexe par rapport au model 
+
+        Model2:la validation est toujours au dessus mais reste tres proche
+
+
+    Matrices de confusions:
+
+        Model1: dit plus souvent que la personnes ne passe pas l année que juste avant
+
+        Model2: devient un peu plus biaiser car il dit plus souvent qu'il passe l annéee que precedement
+
+
+conlusion de base c est qu'il fallait bien un reseau plus simple
+
+cependant apres avoir reverifier le code ( entrainement avec x_train au lieu de X_train_scaller et dans le test on avait x_test)
+
+loss fonctions :
+
+        Model1: overfiting tres elevé car divergence tres importante 
+
+        Model2: overfiting tres elevé car divergence tres importante encore plus importante 
+
+
+-> trop complexe pour ce qui est demander  donc on va enlever une couche pour regler ce probleme
+on baisse le nombre d epoch car pas utile à 250/200
+
+Pour 250 Epochs:
+
+    loss fonctions :
+
+        Model1: on a toujours une divergence mais moins faible donc le reseau est toujours trop complexe
+
+
+        Model2:nous avons les courbes que se chevoche une bonne partie du tracet mais cela est deja beaucoup mieux
+
+
+    Matrices de confusions:
+
+        Model1: plus precis pour la prediciton qu'ils passe et moins pour le fait qu'il ne passe pas
+
+        Model2: inversement car moins biaiser mais se retrouve avec le meme pourcentage de predicitons pour le fait qu'il passe l'année mais avec une plus grande chance de predire qu'il ne passe pas l'année
+
+
+
+avec des reseau de neuronne pas fou de faire une classification un percepron , ensuite classification svm puis randomforest 
+
+Matrices de confusions :
+
+    randomforest :
+
+    SVM Kernel:
+
+
+apres avoir fait cela passons sur de la determiner une categorie de note ex (0-4,5-10,11-15,16-20)
