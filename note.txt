@@ -81,13 +81,39 @@ Pour 250 Epochs:
 
 
 
+
 avec des reseau de neuronne pas fou de faire une classification un percepron , ensuite classification svm puis randomforest 
 
 Matrices de confusions :
 
-    randomforest :
+    randomforest : precision : 93%  recall :62%
 
-    SVM Kernel:
+    SVM Kernel: precision : 96% recall: 58%
+
+on peut donc deja voir qu ils ont une meilleure précision et recall que les model precedement et avec le randomforest qui est meilleur pour predire l echec de l année
+
+Pour le randomforest nous avons le paramettre le plus important qui applique l echec qui est le fait d avoir deja échoué au exam
 
 
-apres avoir fait cela passons sur de la determiner une categorie de note ex (0-4,5-10,11-15,16-20)
+
+
+commencons donc par comparer les models en fonctions de l'accuracy: on peut bien voir que le svm est devant le randomforest puis nous avons MLP2 puis MLP1
+ces resultats ne sont pas etonant avec ce qu on a vu precedementavec les model mlp et pour ce qui est du RF et du SVM comme il y a beaucoup de positif cela biaise l'accuracy donc c est pour cela que le svm est devant
+
+recherche des correlation entre le fait de passer son année est les differents paramettre: 🔍 Top 10 corrélations avec 'passe_annee' :
+  -0.4502  █████████             failures
+  -0.3421  ██████                higher
+  -0.3046  ██████                school
+  -0.1749  ███                   age
+  -0.1655  ███                   reason
+  -0.1446  ██                    Dalc
+  -0.1403  ██                    internet
+    +0.2100  ████                  Fedu
+      +0.2184  ████                  Medu
+        +0.2219  ████                  studytime
+
+
+
+apres avoir fait cela passons sur de la determiner une categorie de note ex (<10,10-13,14-16,17-20)
+
+nous pouvons voir qu a l origine la repartission des notes ressemble a une gaussienne
