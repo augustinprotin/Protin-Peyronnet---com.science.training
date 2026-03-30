@@ -1,64 +1,279 @@
 Sur percepron
 
+
+
 Pour 100 Epochs:
+
+
 
     loss fonctions :
 
+
+
         Model1: 
+
         Model2:
+
         globalement la meme chose avec une baisse plus rapide pour le model1 et plus basse
+
+
 
     Matrices de confusions:
 
+
+
         Model1: nous pouvons voir qu'il y a 87% de prédire qu'il passe vraiment l'année et 64.7% qu'il ne passe vraiment pas l'année par rapport a ce qu'il y a était predit
+
+
 
         Model2: 91% qu'il passe vraiment l'année par rapport a ce qu'il a predit et 55% pour ne pas passer l année
 
 
+
+
+
 avec les courbes de loss on c est dit que finalement la courbe n avais pas finir de decroire donc on a voulu passer a 1000 epoches pour verifier cela
+
+
 
 Pour 1000 Epochs:
 
+
+
     loss fonctions :
+
         Model1: 
+
         Model2:
+
+
 
         on peut voir que sur le model 1 le model tend plus fortement et plus bas que le model 2
 
+
+
     Matrices de confusions:
 
+
+
         Model1: 86% pour vrai et 67% pour les faux
+
+
 
         Model2: 85% pour vrai et 55% pour faux
 
 
+
+
+
 avec cette baisse de la capaciter a predire part rapport a ce qu on a eu precedement on peut se douter d un overfiting 
+
 donc pour verifier cela on va mettre la loss avec la validation loss pour comparer
 
+
+
 loss fonctions :
+
         Model1: on peut voir qu il y a un overfiting car la validation loss est au dessus du train loss 
+
         on donc dire que le reseau est trop complexe par rapport au model 
+
+
 
         Model2:la validation est toujours au dessus mais reste tres proche
 
 
+
+
+
     Matrices de confusions:
 
+
+
         Model1: dit plus souvent que la personnes ne passe pas l année que juste avant
+
+
 
         Model2: devient un peu plus biaiser car il dit plus souvent qu'il passe l annéee que precedement
 
 
+
+
+
 conlusion de base c est qu'il fallait bien un reseau plus simple
+
+
 
 cependant apres avoir reverifier le code ( entrainement avec x_train au lieu de X_train_scaller et dans le test on avait x_test)
 
+
+
 loss fonctions :
+
+
 
         Model1: overfiting tres elevé car divergence tres importante 
 
+
+
         Model2: overfiting tres elevé car divergence tres importante encore plus importante 
 
+
+
+
+
+-> trop complexe pour ce qui est demander  donc on va enlever une couche pour regler ce probleme
+
+on baisse le nombre d epoch car pas utile à 250/200
+
+
+
+Pour 250 Epochs:
+
+
+
+    loss fonctions :
+
+
+
+        Model1: on a toujours une divergence mais moins faible donc le reseau est toujours trop complexe
+
+
+
+
+
+        Model2:nous avons les courbes que se chevoche une bonne partie du tracet mais cela est deja beaucoup mieux
+
+
+
+
+
+    Matrices de confusions:
+
+
+
+        Model1: plus precis pour la prediciton qu'ils passe et moins pour le fait qu'il ne passe pas
+
+
+
+        Model2: inversement car moins biaiser mais se retrouve avec le meme pourcentage de predicitons pour le fait qu'il passe l'année mais avec une plus grande chance de predire qu'il ne passe pas l'année
+
+
+
+
+
+
+
+
+
+avec des reseau de neuronne pas fou de faire une classification un percepron , ensuite classification svm puis randomforest 
+
+
+
+Matrices de confusions :
+
+
+
+    randomforest : precision : 93%  recall :62%
+
+
+
+    SVM Kernel: precision : 96% recall: 58%
+
+
+
+on peut donc deja voir qu ils ont une meilleure précision et recall que les model precedement et avec le randomforest qui est meilleur pour predire l echec de l année
+
+
+
+Pour le randomforest nous avons le paramettre le plus important qui applique l echec qui est le fait d avoir deja échoué au exam
+
+
+
+
+
+
+
+
+
+commencons donc par comparer les models en fonctions de l'accuracy: on peut bien voir que le svm est devant le randomforest puis nous avons MLP2 puis MLP1
+
+ces resultats ne sont pas etonant avec ce qu on a vu precedementavec les model mlp et pour ce qui est du RF et du SVM comme il y a beaucoup de positif cela biaise l'accuracy donc c est pour cela que le svm est devant
+
+
+
+recherche des correlation entre le fait de passer son année est les differents paramettre: 🔍 Top 10 corrélations avec 'passe_annee' :
+
+  -0.4502  █████████             failures
+
+  -0.3421  ██████                higher
+
+  -0.3046  ██████                school
+
+  -0.1749  ███                   age
+
+  -0.1655  ███                   reason
+
+  -0.1446  ██                    Dalc
+
+  -0.1403  ██                    internet
+
+    +0.2100  ████                  Fedu
+
+      +0.2184  ████                  Medu
+
+        +0.2219  ████                  studytime
+
+
+
+
+
+
+
+apres avoir fait cela passons sur de la determiner une categorie de note ex (<10,10-13,14-16,17-20)
+
+
+
+nous pouvons voir qu a l origine la repartission des notes ressemble a une gaussienne
+
+
+
+
+
+Pour ce qui est des mlp nous avons deux courbes d apprentissage avec MSE et MAE pour analyser qui sont tres belle avec une difference entre la courbe de train et de validation qui sont faible voir confondu dans certain classification
+
+
+
+nous pouvons cependant voir que la courbe du mlp 2 est plus intersante car le MAE est plus faible(en valeur) et continue de converger par rapport a celui du mlp 1 qui diverge peu à peu
+
+
+
+nous pouvons voir l interet d avoir un reseau neuronne plus simple 
+
+
+
+Pour ce qui est des diagramme de confusions nous avons pour MLP1 nous avons dans l ensemble quelque chose d eclater ou il va essayer de mettre des données un peu de partout sauf pour les valeur tres basse. cependant il y a cerrtaine concentration des données pour les notes assez bien mais avec une sous evaluation des notes inferieurs a 10.
+
+pour le mlp 2 nous avons pour les notes inferieurs à 7 une meilleur concentration qui fait baisser l'erreur quadratique (explication de la partie precedente) nous pouvons voir une nette demarcation sur le note entre 10-13 cepdenant pour les note superieur a 14 du au fait qu il y a peu de note il confond avec 12-13 par exemple et n arrive pas a les trouver et etales donc les resulats sur toutes les notes 
+
+
+
+la courbe de comparaison est plus concentrer sur la deuxieme 
+
+
+
+
+
+pour ce qui est de SVR et de RF nous avons des données tres concencter pour eviter de les mettres dans les extremums 
+
+
+
+pour svr 0-7 il va mettre assez bas en ne savant pas trop entre 8-9 il va mettre entre 8-13 et de facon plus concentrer que mlp et de 10-13 il vas presque tout mettre dans ces endroits
+
+
+
 pour RF il ne va mettre presque aussi aucune messure sur les extremums en metant les nums a envrion 12-13 tres souvent
+
+
 
 les graphique de qui montres les points predits le montre tres bien aussi
