@@ -1,2 +1,28 @@
-sur les courbes des loss fonctions : 
-    Model1: 
+Pour 100 Epochs:
+
+    loss fonctions :
+
+        Model1: 
+
+        Model2:
+
+    Matrices de confusions:
+
+        Model1: nous pouvons voir qu'il y a 87% de prédire qu'il passe vraiment l'année et 64.7% qu'il ne passe vraiment pas l'année par rapport a ce qu'il y a était predit
+
+        Model2: 91% qu'il passe vraiment l'année par rapport a ce qu'il a predit et 55% pour ne pas passer l année
+
+
+Pour 1000 Epochs:
+
+    loss fonctions :
+
+        Model1: 
+
+        Model2:
+
+    Matrices de confusions:
+
+        Model1:
+
+        Model2:
